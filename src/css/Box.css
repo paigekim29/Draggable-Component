@@ -1,0 +1,10 @@
+#box {
+  width: 400px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding-left: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
