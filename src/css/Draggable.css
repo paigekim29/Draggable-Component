@@ -1,13 +1,10 @@
-#borderBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-}
-
 #taskTitle {
   font-weight: bold;
   margin-bottom: 10px;
   font-size: 24px;
+}
+
+#borderBox {
+  position: absolute;
+  cursor: move;
 }

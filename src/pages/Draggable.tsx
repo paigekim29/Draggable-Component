@@ -2,15 +2,8 @@ import React, { useState } from "react";
 import Box from "./Box";
 import "../css/Draggable.css";
 
-interface handleSetTasksProps {
-  tasks: {
-    id: number;
-    task: string;
-  }[];
-}
-
 const Draggable: React.FC = () => {
-  const [tasks, setTasks] = useState({
+  const [tasks] = useState({
     tasks: [
       { id: 0, task: "Brush your teeth" },
       { id: 1, task: "Wash your face" },
@@ -19,30 +12,27 @@ const Draggable: React.FC = () => {
       { id: 4, task: "Take a shower" },
     ],
   });
-  const handleSetTasks = (task: handleSetTasksProps): void => {
-    setTasks(task);
-  };
 
-  const [draggingIndex, setDraggingIndex] = useState(0);
-
-  const handleDragStart = (index: number) => {
-    setDraggingIndex(index);
+  const [draggingPosition, setDraggingPosition] = useState({ x: 0, y: 0 });
+  const handleDraggingPosition = (x: number, y: number) => {
+    console.log(x, y);
+    setDraggingPosition({ x, y });
   };
 
   return (
-    <div id="borderBox">
+    <div
+      id="borderBox"
+      draggable="true"
+      onDragOver={(e) => e.preventDefault()}
+      onDrag={(e) => handleDraggingPosition(e.clientX, e.clientY)}
+      style={{
+        transform: `translate(${draggingPosition.x}px, ${draggingPosition.y}px)`,
+      }}
+    >
       <div id="taskTitle">To Do</div>
       <>
         {tasks.tasks.map((task, index) => (
-          <Box
-            key={task.id}
-            task={task}
-            handleSetTasks={handleSetTasks}
-            tasks={tasks.tasks}
-            index={index}
-            draggingIndex={draggingIndex}
-            handleDragStart={handleDragStart}
-          />
+          <Box key={task.id} task={task} index={index} />
         ))}
       </>
     </div>
